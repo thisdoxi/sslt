@@ -1,6 +1,6 @@
 <template>
   <div class="goodsitem" @click="itemgoods">
-    <img :src="goodsitem.show.img" alt="" />
+    <img :src="showImg" alt="" />
     <div class="itemtextBox">
       <p class="itemtext">{{ goodsitem.title }}</p>
       <p class="price">
@@ -21,19 +21,28 @@ export default {
       },
     },
   },
+  computed: {
+    showImg() {
+      return this.goodsitem.image || this.goodsitem.show.img;
+    },
+  },
   data() {
     return {};
   },
   mounted() {},
   methods: {
     itemgoods() {
-      this.$router.push("/detail/" + this.goodsitem.iid);
+      if (this.goodsitem.iid !== undefined) {
+        this.$router.push("/detail/" + this.goodsitem.iid);
+      } else {
+        this.$router.push("/detail/" + this.goodsitem.item_id);
+      }
     },
   },
 };
 </script>
 
-<style>
+<style scoped>
 .goodsitem {
   width: 46%;
   border-radius: 6px;
