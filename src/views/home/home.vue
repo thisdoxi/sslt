@@ -27,9 +27,10 @@ import feature from "views/home/childComps/feature"; //本周流行
 
 import tabcontrol from "components/content/tabcontrol/tabcontrol"; //tab切换
 import goodslist from "components/content/goods/goodslist"; //tab显示区
-import backtop from "components/content/backtop/backtop"; //tab显示区
 
 import { gethomemultidata, gethomegoods } from "network/home"; //请求
+
+import { backTopmixin } from "common/mixin";
 
 export default {
   components: {
@@ -41,8 +42,8 @@ export default {
     feature,
     tabcontrol,
     goodslist,
-    backtop,
   },
+  mixins: [backTopmixin],
   data() {
     return {
       banners: [],
@@ -58,6 +59,7 @@ export default {
       istabfix: false,
     };
   },
+
   computed: {
     showgoods() {
       return this.goods[this.currentType].list;
@@ -71,7 +73,7 @@ export default {
     this.gethomegoods("new");
     this.gethomegoods("sell");
   },
-  mounted() {},
+  mounted() { },
   destroyed() {
     // console.log("1111111111");
   },
@@ -110,10 +112,6 @@ export default {
       });
     },
 
-    // 返回顶部
-    backClick() {
-      this.$refs.scroll.scrollTo(0, 0);
-    },
 
     // 监听滚动位置进行显示隐藏
     contentScroll(position) {

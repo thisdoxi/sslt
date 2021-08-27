@@ -1,6 +1,6 @@
 export function
 // 防抖动
-debounce(func, delay) {
+debouce(func, delay) {
   let timer = null;
 
   return function(...args) {
