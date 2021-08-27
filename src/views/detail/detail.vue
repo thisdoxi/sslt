@@ -12,7 +12,7 @@
       <detailcomments :commentInfo="commentInfo" ref="detailcomments"></detailcomments>
       <goodsList :goods="recommends" ref="goodsList"></goodsList>
     </scroll>
-    <detailButtonbar></detailButtonbar>
+    <detailButtonbar @cartClickBtn="cartBtn"></detailButtonbar>
     <backtop @click="backClick" v-show="isposition"></backtop>
   </div>
 </template>
@@ -130,6 +130,19 @@ export default {
       // }
       this.isposition = -position.y > 1000
     },
+    // 加入购物车
+    cartBtn() {
+      // 1、获取购物车需要展示的商品信息
+      const product = {};
+      product.image = this.topImages[0];
+      product.title = this.goodsInfo.title;
+      product.desc = this.goodsInfo.desc;
+      product.price = this.goodsInfo.realPrice;
+      product.iid = this.iid;
+      console.log(product);
+      // 2、将商品加入到购物车
+      this.$store.commit('addCart', product)
+    }
   },
 }
 </script>

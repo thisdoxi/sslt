@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="bar-item bar-right">
-      <div class="cart">加入购物车</div>
+      <div class="cart" @click="cartBtn">加入购物车</div>
       <div class="buy">购买</div>
     </div>
   </div>
@@ -30,7 +30,11 @@ export default {
   data() { return {} },
   computed: {},
   watch: {},
-  methods: {},
+  methods: {
+    cartBtn() {
+      this.$emit("cartClickBtn")
+    }
+  },
   created() { },
   mounted() { },
   beforeCreate() { },
@@ -65,7 +69,7 @@ export default {
   width: 22px;
   height: 22px;
   margin: 10px auto 3px;
-  background: url('~assets/img/detail/detail_bottom.png') 0 0/100%;
+  background: url("~assets/img/detail/detail_bottom.png") 0 0/100%;
 }
 .bar-left .service {
   background-position: 0 -54px;
