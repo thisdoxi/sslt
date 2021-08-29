@@ -139,9 +139,8 @@ export default {
       product.desc = this.goodsInfo.desc;
       product.price = this.goodsInfo.realPrice;
       product.iid = this.iid;
-      console.log(product);
       // 2、将商品加入到购物车
-      this.$store.commit('addCart', product)
+      this.$store.dispatch('addCart', product)
     }
   },
 }
