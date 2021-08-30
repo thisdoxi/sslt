@@ -1,6 +1,6 @@
-import backtop from "components/content/backtop/backtop"; //tab显示区
-export const backTopmixin={
-    components:{
+import backtop from "components/content/backtop/backtop";
+export const backTopmixin = {
+    components: {
         backtop,
     },
     data() {
@@ -8,10 +8,10 @@ export const backTopmixin={
             isposition: false
         }
     },
-    methods:{
+    methods: {
         // 返回顶部
         backClick() {
-        this.$refs.scroll.scrollTo(0, 0);
-      },
+            this.$refs.scroll.scrollTo(0, 0);
+        },
     }
 }

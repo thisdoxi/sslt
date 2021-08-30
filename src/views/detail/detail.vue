@@ -14,6 +14,7 @@
     </scroll>
     <detailButtonbar @cartClickBtn="cartBtn"></detailButtonbar>
     <backtop @click="backClick" v-show="isposition"></backtop>
+    <toast :message="message" :show="show" />
   </div>
 </template>
 
@@ -29,11 +30,14 @@ import detailParamInfo from './childComps/detailParamInfo' //商品参数
 import detailcomments from './childComps/detailcomments' //商品评论
 import goodsList from 'components/content/goods/goodslist' //推荐
 import detailButtonbar from './childComps/detailButtonbar' //推荐
+import toast from 'components/common/toast/toast' //弹窗
+
 
 import { debouce } from 'common/utils' //防抖
 import scroll from 'components/common/scroll/scroll'
 
 import { backTopmixin } from 'common/mixin'
+
 import {
   getDetail,
   goodsInfo,
@@ -55,6 +59,7 @@ export default {
     detailcomments,
     goodsList,
     detailButtonbar,
+    toast
   },
   mixins: [backTopmixin],
   data() {
@@ -69,6 +74,8 @@ export default {
       recommends: [],
       themeTopYs: [],
       getThemeTopY: null,
+      message: '',
+      show: false
     }
   },
   created() {
@@ -140,7 +147,15 @@ export default {
       product.price = this.goodsInfo.realPrice;
       product.iid = this.iid;
       // 2、将商品加入到购物车
-      this.$store.dispatch('addCart', product)
+      this.$store.dispatch('addCart', product).then(res => {
+        // console.log(res);
+        this.show = true;
+        this.message = res
+        setTimeout(() => {
+          this.show = false;
+          this.message = ''
+        }, 1000);
+      })
     }
   },
 }
